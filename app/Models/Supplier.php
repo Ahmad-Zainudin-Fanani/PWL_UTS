@@ -9,4 +9,9 @@ class Supplier extends Model
     protected $table = 'm_supplier';
     protected $primaryKey = 'supplier_id';
     protected $fillable = ['supplier_kode', 'supplier_nama', 'supplier_alamat'];
+
+    public function stoks()
+    {
+        return $this->hasMany(Stok::class, 'supplier_id', 'supplier_id');
+    }
 }
