@@ -5,6 +5,7 @@ namespace App\Filament\Resources\Penjualans;
 use App\Filament\Resources\Penjualans\Pages\CreatePenjualan;
 use App\Filament\Resources\Penjualans\Pages\EditPenjualan;
 use App\Filament\Resources\Penjualans\Pages\ListPenjualans;
+use App\Filament\Resources\Penjualans\Pages\ViewPenjualan;
 use App\Filament\Resources\Penjualans\Schemas\PenjualanForm;
 use App\Filament\Resources\Penjualans\Tables\PenjualansTable;
 use App\Models\Penjualan;
@@ -18,9 +19,11 @@ class PenjualanResource extends Resource
 {
     protected static ?string $model = Penjualan::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static ?string $modelLabel = 'Penjualan';
+    protected static ?string $pluralModelLabel = 'Penjualan';
+    protected static ?string $navigationLabel = 'Histori Penjualan';
 
-    protected static ?string $recordTitleAttribute = 'penjualan';
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::ShoppingCart;
 
     public static function form(Schema $schema): Schema
     {
@@ -43,8 +46,27 @@ class PenjualanResource extends Resource
     {
         return [
             'index' => ListPenjualans::route('/'),
-            'create' => CreatePenjualan::route('/create'),
-            'edit' => EditPenjualan::route('/{record}/edit'),
+            'view' => ViewPenjualan::route('/{record}'),
         ];
+    }
+
+    public static function canCreate(): bool
+    {
+        return false; // Tidak bisa buat transaksi dari resource, gunakan halaman POS
+    }
+
+    public static function canEdit(\Illuminate\Database\Eloquent\Model $record): bool
+    {
+        return false; // Histori read-only
+    }
+
+    public static function canDelete(\Illuminate\Database\Eloquent\Model $record): bool
+    {
+        return false; // Histori tidak boleh dihapus
+    }
+
+    public static function canDeleteAny(): bool
+    {
+        return false;
     }
 }
