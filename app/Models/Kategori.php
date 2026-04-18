@@ -8,5 +8,14 @@ class Kategori extends Model
 {
     protected $table = 'm_kategori';
     protected $primaryKey = 'kategori_id';
-    protected $fillable = ['kategori_kode', 'kategori_nama'];
+
+    protected $fillable = [
+        'kategori_kode',
+        'kategori_nama',
+    ];
+
+    public function barangs()
+    {
+        return $this->hasMany(Barang::class, 'kategori_id', 'kategori_id');
+    }
 }
