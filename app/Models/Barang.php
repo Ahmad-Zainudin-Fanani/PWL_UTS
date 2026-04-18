@@ -8,10 +8,23 @@ class Barang extends Model
 {
     protected $table = 'm_barang';
     protected $primaryKey = 'barang_id';
-    protected $fillable = ['kategori_id', 'barang_kode', 'barang_nama', 'harga_beli', 'harga_jual'];
+
+    protected $fillable = [
+        'kategori_id',
+        'barang_kode',
+        'barang_nama',
+        'harga_beli',
+        'harga_jual',
+        'foto',
+    ];
 
     public function kategori()
     {
-    return $this->belongsTo(Kategori::class, 'kategori_id');
+        return $this->belongsTo(Kategori::class, 'kategori_id', 'kategori_id');
+    }
+
+    public function stok()
+    {
+        return $this->hasMany(Stok::class, 'barang_id', 'barang_id');
     }
 }
