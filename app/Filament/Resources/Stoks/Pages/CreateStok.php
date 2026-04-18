@@ -8,4 +8,9 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateStok extends CreateRecord
 {
     protected static string $resource = StokResource::class;
+
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
+    }
 }

@@ -20,7 +20,8 @@ class BarangResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
-    protected static ?string $recordTitleAttribute = 'barang';
+    // Diarahkan ke barang_nama agar judul record jelas di dashboard
+    protected static ?string $recordTitleAttribute = 'barang_nama';
 
     public static function form(Schema $schema): Schema
     {
