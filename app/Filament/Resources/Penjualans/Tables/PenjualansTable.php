@@ -2,9 +2,8 @@
 
 namespace App\Filament\Resources\Penjualans\Tables;
 
-use Filament\Actions\BulkActionGroup;
-use Filament\Actions\DeleteBulkAction;
-use Filament\Actions\EditAction;
+use Filament\Actions\ViewAction;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
 class PenjualansTable
@@ -13,18 +12,36 @@ class PenjualansTable
     {
         return $table
             ->columns([
-                //
+                TextColumn::make('penjualan_kode')
+                    ->label('Kode Transaksi')
+                    ->searchable()
+                    ->sortable(),
+                TextColumn::make('penjualan_tanggal')
+                    ->label('Tanggal')
+                    ->dateTime('d-m-Y H:i')
+                    ->sortable(),
+                TextColumn::make('pembeli')
+                    ->label('Pembeli')
+                    ->searchable(),
+                TextColumn::make('user.nama')
+                    ->label('Kasir')
+                    ->searchable(),
+                TextColumn::make('created_at')
+                    ->label('Dibuat')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //
             ])
             ->recordActions([
-                EditAction::make(),
+                ViewAction::make()
+                    ->label('Lihat Detail'),
             ])
             ->toolbarActions([
-                BulkActionGroup::make([
-                    DeleteBulkAction::make(),
-                ]),
-            ]);
+                // Histori read-only, tidak ada aksi bulk
+            ])
+            ->defaultSort('penjualan_tanggal', 'desc');
     }
 }
