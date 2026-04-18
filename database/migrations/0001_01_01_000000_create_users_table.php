@@ -13,10 +13,14 @@ return new class extends Migration
     {
         // Ganti 'users' menjadi 'm_user' sesuai ERD
         Schema::create('m_user', function (Blueprint $table) {
-            $table->id('user_id'); // Primary Key sesuai ERD
-            $table->unsignedBigInteger('level_id')->index();
-            $table->string('username', 20)->unique();
-            $table->string('nama', 100);
+            $table->id('user_id');
+            
+            // PASTIKAN BARIS INI HANYA ADA SATU (pilih yang nullable agar tidak error make:user)
+            $table->unsignedBigInteger('level_id')->index()->nullable(); 
+            
+            $table->string('username', 20)->unique()->nullable();
+            $table->string('name', 100);
+            $table->string('email')->unique();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
