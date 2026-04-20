@@ -9,10 +9,10 @@ use App\Models\Level;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
-use Filament\Forms\Form; // Pastikan import ini ada
-use Filament\Forms\Components\TextInput; // Pastikan import ini ada
+use Filament\Forms\Form;
+use Filament\Forms\Components\TextInput; 
 use Filament\Tables\Table;
-use Filament\Tables\Columns\TextColumn; // Pastikan import ini ada
+use Filament\Tables\Columns\TextColumn; 
 use Filament\Support\Icons\Heroicon;
 
 class LevelResource extends Resource
@@ -25,7 +25,6 @@ class LevelResource extends Resource
 
     public static function form(Schema $schema): Schema
     {
-        // Langsung masukkan schema di sini agar cepat untuk UTS
         return $schema->components([
             TextInput::make('level_kode')
                 ->required()
